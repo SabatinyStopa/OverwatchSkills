@@ -1,0 +1,28 @@
+{
+    "name": "First",
+    "maps": [
+        {
+            "name": "Moviment",
+            "id": "9d26adc2-3944-41b5-86a9-ff43a221f0e6",
+            "actions": [
+                {
+                    "name": "WASD",
+                    "type": "PassThrough",
+                    "id": "55ec2cb7-4804-40cb-96f2-38dc0be4780f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": []
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "Controls",
+            "bindingGroup": "Controls",
+            "devices": []
+        }
+    ]
+}
