@@ -10,6 +10,8 @@ namespace OverwatchClone.Player
         private SimpleControls controls;
         private Vector2 rotation;
 
+        public SimpleControls Controls { get => controls; set => controls = value; }
+
         private void Awake() => controls = new SimpleControls();
         private void OnEnable() => controls.Enable();
         private void OnDisable() => controls.Disable();
