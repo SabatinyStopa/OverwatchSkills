@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace OverwatchClone.Player
 {
@@ -15,6 +16,12 @@ namespace OverwatchClone.Player
         private void Awake() => controls = new SimpleControls();
         private void OnEnable() => controls.Enable();
         private void OnDisable() => controls.Disable();
+
+        private void Start()
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
 
         private void Update()
         {
