@@ -125,14 +125,12 @@ namespace OverwatchClone.Player
             var elapsedTime = 0f;
             var step = GetClosestStep();
 
-            while (elapsedTime < timeTravelTime)
+            while (Vector3.Distance(step.Position, transform.position) > 0.4f)
             {
-                var t = elapsedTime / timeTravelTime;
+                transform.position = Vector3.Lerp(transform.position, step.Position, elapsedTime);
+                transform.rotation = Quaternion.Lerp(transform.rotation, step.Rotation, elapsedTime);
 
-                transform.position = Vector3.Lerp(transform.position, step.Position, t);
-                transform.rotation = Quaternion.Lerp(transform.rotation, step.Rotation, t);
-
-                elapsedTime += Time.deltaTime;
+                elapsedTime += Time.deltaTime * timeTravelTime;
                 yield return null;
             }
 
