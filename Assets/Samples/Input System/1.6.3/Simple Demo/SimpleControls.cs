@@ -53,6 +53,33 @@ public partial class @SimpleControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""reload"",
+                    ""type"": ""Button"",
+                    ""id"": ""4d72ae56-9902-4f9c-a5db-ec905ba1f1a7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""shift"",
+                    ""type"": ""Button"",
+                    ""id"": ""c5a2094f-4cae-4e24-b31b-41cfd6f173e4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""E"",
+                    ""type"": ""Button"",
+                    ""id"": ""c0a579af-ed1d-40de-b440-1f850be4c1a4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -154,6 +181,50 @@ public partial class @SimpleControls: IInputActionCollection2, IDisposable
                     ""action"": ""look"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""96a65aa5-7961-4d1f-a9bc-969c8f9d2a57"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""reload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9f29be0b-a183-419c-b30e-47899c89d116"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""shift"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c46552d0-21f2-4f6e-bd40-3d24211eb5d5"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""shift"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""07f9728a-050d-4729-97eb-a2f385fcc850"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""E"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -165,6 +236,9 @@ public partial class @SimpleControls: IInputActionCollection2, IDisposable
         m_gameplay_fire = m_gameplay.FindAction("fire", throwIfNotFound: true);
         m_gameplay_move = m_gameplay.FindAction("move", throwIfNotFound: true);
         m_gameplay_look = m_gameplay.FindAction("look", throwIfNotFound: true);
+        m_gameplay_reload = m_gameplay.FindAction("reload", throwIfNotFound: true);
+        m_gameplay_shift = m_gameplay.FindAction("shift", throwIfNotFound: true);
+        m_gameplay_E = m_gameplay.FindAction("E", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -229,6 +303,9 @@ public partial class @SimpleControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_gameplay_fire;
     private readonly InputAction m_gameplay_move;
     private readonly InputAction m_gameplay_look;
+    private readonly InputAction m_gameplay_reload;
+    private readonly InputAction m_gameplay_shift;
+    private readonly InputAction m_gameplay_E;
     public struct GameplayActions
     {
         private @SimpleControls m_Wrapper;
@@ -236,6 +313,9 @@ public partial class @SimpleControls: IInputActionCollection2, IDisposable
         public InputAction @fire => m_Wrapper.m_gameplay_fire;
         public InputAction @move => m_Wrapper.m_gameplay_move;
         public InputAction @look => m_Wrapper.m_gameplay_look;
+        public InputAction @reload => m_Wrapper.m_gameplay_reload;
+        public InputAction @shift => m_Wrapper.m_gameplay_shift;
+        public InputAction @E => m_Wrapper.m_gameplay_E;
         public InputActionMap Get() { return m_Wrapper.m_gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -254,6 +334,15 @@ public partial class @SimpleControls: IInputActionCollection2, IDisposable
             @look.started += instance.OnLook;
             @look.performed += instance.OnLook;
             @look.canceled += instance.OnLook;
+            @reload.started += instance.OnReload;
+            @reload.performed += instance.OnReload;
+            @reload.canceled += instance.OnReload;
+            @shift.started += instance.OnShift;
+            @shift.performed += instance.OnShift;
+            @shift.canceled += instance.OnShift;
+            @E.started += instance.OnE;
+            @E.performed += instance.OnE;
+            @E.canceled += instance.OnE;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -267,6 +356,15 @@ public partial class @SimpleControls: IInputActionCollection2, IDisposable
             @look.started -= instance.OnLook;
             @look.performed -= instance.OnLook;
             @look.canceled -= instance.OnLook;
+            @reload.started -= instance.OnReload;
+            @reload.performed -= instance.OnReload;
+            @reload.canceled -= instance.OnReload;
+            @shift.started -= instance.OnShift;
+            @shift.performed -= instance.OnShift;
+            @shift.canceled -= instance.OnShift;
+            @E.started -= instance.OnE;
+            @E.performed -= instance.OnE;
+            @E.canceled -= instance.OnE;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -289,5 +387,8 @@ public partial class @SimpleControls: IInputActionCollection2, IDisposable
         void OnFire(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
+        void OnReload(InputAction.CallbackContext context);
+        void OnShift(InputAction.CallbackContext context);
+        void OnE(InputAction.CallbackContext context);
     }
 }

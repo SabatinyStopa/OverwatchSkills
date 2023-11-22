@@ -1,35 +1,34 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace OverwatchClone.Player
 {
     public class FirstPersonController : MonoBehaviour
     {
-        [SerializeField] private float mouseSensitive = 100f;
-        [SerializeField] private float moveSpeed = 5f;
+        [SerializeField] protected float mouseSensitive = 100f;
+        [SerializeField] protected float moveSpeed = 5f;
 
-        private SimpleControls controls;
-        private Vector2 rotation;
+        protected SimpleControls controls;
+        protected Vector2 rotation;
 
         public SimpleControls Controls { get => controls; set => controls = value; }
 
-        private void Awake() => controls = new SimpleControls();
-        private void OnEnable() => controls.Enable();
-        private void OnDisable() => controls.Disable();
+        public virtual void Awake() => controls = new SimpleControls();
+        public virtual void OnEnable() => controls.Enable();
+        public virtual void OnDisable() => controls.Disable();
 
-        private void Start()
+        public virtual void Start()
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
 
-        private void Update()
+        public virtual void Update()
         {
             RotationHandler();
             MovimentHandler();
         }
 
-        private void MovimentHandler()
+        public virtual void MovimentHandler()
         {
             var direction = controls.gameplay.move.ReadValue<Vector2>();
 
@@ -40,7 +39,7 @@ namespace OverwatchClone.Player
             transform.position += move * scaledMoveSpeed;
         }
 
-        private void RotationHandler()
+        public virtual void RotationHandler()
         {
             var look = controls.gameplay.look.ReadValue<Vector2>();
             if (look.sqrMagnitude < 0.01) return;
@@ -52,5 +51,4 @@ namespace OverwatchClone.Player
             transform.localEulerAngles = rotation;
         }
     }
-
 }

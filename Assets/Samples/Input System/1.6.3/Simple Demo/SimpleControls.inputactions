@@ -11,7 +11,8 @@
                     "id": "1077f913-a9f9-41b1-acb3-b9ee0adbc744",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Tap,SlowTap"
+                    "interactions": "Tap,SlowTap",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "move",
@@ -19,7 +20,8 @@
                     "id": "50fd2809-3aa3-4a90-988e-1facf6773553",
                     "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": true
                 },
                 {
                     "name": "look",
@@ -27,7 +29,35 @@
                     "id": "c60e0974-d140-4597-a40e-9862193067e9",
                     "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "reload",
+                    "type": "Button",
+                    "id": "4d72ae56-9902-4f9c-a5db-ec905ba1f1a7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "shift",
+                    "type": "Button",
+                    "id": "c5a2094f-4cae-4e24-b31b-41cfd6f173e4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "E",
+                    "type": "Button",
+                    "id": "c0a579af-ed1d-40de-b440-1f850be4c1a4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -127,6 +157,50 @@
                     "processors": "ScaleVector2(x=2,y=2)",
                     "groups": "",
                     "action": "look",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "96a65aa5-7961-4d1f-a9bc-969c8f9d2a57",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "reload",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9f29be0b-a183-419c-b30e-47899c89d116",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "shift",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c46552d0-21f2-4f6e-bd40-3d24211eb5d5",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "shift",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "07f9728a-050d-4729-97eb-a2f385fcc850",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "E",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

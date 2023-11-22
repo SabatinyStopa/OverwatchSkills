@@ -25,7 +25,11 @@ namespace OverwatchClone.Player
         private void OnEnable() => controls.Enable();
         private void OnDisable() => controls.Disable();
 
-        private void Start() => currentMagazine = magazineCapacity;
+        private void Start()
+        {
+            currentMagazine = magazineCapacity;
+            controls.gameplay.reload.performed += Reload;
+        }
 
         private void Update()
         {
@@ -67,14 +71,17 @@ namespace OverwatchClone.Player
                 var hitted = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
                 var hitted2 = Instantiate(impactEffect, randomPosition, Quaternion.identity);
 
-                Destroy(hitted, 3f);
-                Destroy(hitted2, 3f);
+                Destroy(hitted.gameObject, 3f);
+                Destroy(hitted2.gameObject, 3f);
             }
 
             currentMagazine -= 2;
         }
 
-        private void Reload(InputAction.CallbackContext context) => StartCoroutine(Realoding());
+        private void Reload(InputAction.CallbackContext context)
+        {
+            if (!isRealoding) StartCoroutine(Realoding());
+        }
 
         private IEnumerator Realoding()
         {
